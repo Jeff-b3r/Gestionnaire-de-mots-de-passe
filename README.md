@@ -7,7 +7,7 @@
 - Jeff Bernabeo 20232406
 
   
-## fonctionnalités indispensables 
+## Fonctionnalités indispensables 
 ### 1 - Création d'un fichier local permettant la sauvegarde des données 
 ### 2 - Chiffrement et déchiffrement des mots de passe du fichier
 - **dépend de 1**. 
@@ -21,7 +21,7 @@
 -   Recherche d'un mot de passe à partir du nom du site ou d'un d'url.
   
 
-## fonctionnalités supplémentaires 
+## Fonctionnalités supplémentaires 
 ### 6 - Copie du mot de passe dans le presse-papier. 
 - **dépend de 1 et 4**.
 ### 7 - Génération automatique d'un mot de passe sécurisé.
