@@ -8,10 +8,17 @@
 
   
 ## Fonctionnalités indispensables 
-### 1 - Création d'un fichier local permettant la sauvegarde des données 
+### 1 - Initialisation du magasin de mots de passe avec pass
+- Création du répertoire local ~/.password-store via pass init.
+- Génération ou utilisation d’une clé GPG existante pour le chiffrement.
 ### 2 - Chiffrement et déchiffrement des mots de passe du fichier
-- **dépend de 1**. 
-### 3 - Authentification de l'utilisateur à l'aide d'un mot de passe maitre 
+- **dépend de 1**.
+- Géré automatiquement par pass via GPG.
+- Chaque mot de passe est stocké dans un fichier .gpg chiffré.
+- Le déchiffrement est déclenché lors de la lecture avec pass show. 
+### 3 - Authentification de l'utilisateur via GPG 
+- L’accès aux mots de passe est protégé par la passphrase de la clé GPG.
+- Cette passphrase joue le rôle de mot de passe maître.
 ### 4 - Mémorisation du nom d'utilisateur et du mot de passe donné selon l'url.
 - **dépend de 1**.
 ### 5 - Suppression, l'édition, l'affichage et la recherche d'un mot de passe. 
