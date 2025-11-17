@@ -83,7 +83,7 @@
 ### 6 - Affichage d'un mot de passe
 - pass show
 - subprocess
-- glob:
+- glob
 
 ### 7 - Edition d'un mot de passe
 - pass edit
