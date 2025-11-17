@@ -11,9 +11,6 @@
 ### 1 - Initialisation du magasin de mots de passe avec pass
 - Création du répertoire local ~/.password-store via pass init.
 - Génération ou utilisation d’une clé GPG existante pour le chiffrement.
-**Briques proposées**
-- Outils externes : `pass` (le gestionnaire standard), `gpg` / `gnupg`  
-- Python (standard) : `subprocess`, `os`, `pathlib`
 
 ### 2 - Chiffrement et déchiffrement des mots de passe du fichier
 - **dépend de 1**.
@@ -54,4 +51,10 @@
 - Permet au gestionnaire de mot de passe de générer un mot de passe robuste.
 ### 12 - Création d'une date d'ajout 
 - **dépend de 4 et 5**.
-- Permet de connaitre la date de création ou de modification d'un mot de passe 
+- Permet de connaitre la date de création ou de modification d'un mot de passe
+
+## Briques logicielles
+### 1 - Initialisation du magasin de mot de passe
+- pass init
+- gnupg : génère, stocke et utilise une clé GPG
+- subprocess : éxécute certaines commandes comme `pass init`
