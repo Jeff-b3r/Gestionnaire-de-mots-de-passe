@@ -69,7 +69,7 @@
 ### 3 - Authentification de l'utilisateur via GPG 
 - gnupg
 - gpg-agent : stocke le passphrase temporairement
-- pinentry : saisie le passphrase de manière sécurisé
+- pinentry : saisie du passphrase de manière sécurisé
 
 ### 4 - Mémorisation du nom d'utilisateur et du mot de passe donné selon l'url.
 - pass : associe l'URL au mot de passe
