@@ -57,41 +57,35 @@
 
 ## Briques logicielles
 ### 1 - Initialisation du magasin de mot de passe
-- `pass init`
+- `os/os.path`: crée le répertoire
 - `gnupg` : génère, stocke et utilise une clé GPG
-- `subprocess` : éxécute certaines commandes comme `pass init`
 
 ### 2 - Chiffrement et déchiffrement des mots de passe du fichier
-- `pass` : enregistre chaque mot de passe dans un fichier gpg
+- `os` : lecture/écriture des fichiers avant chiffrement
 - `gpg-agent` : gère la demande passphrase
-- `subprocess`
 
 ### 3 - Authentification de l'utilisateur via GPG 
 - `gnupg`
 - `gpg-agent` : stocke le passphrase temporairement
-- `pinentry` : saisie du passphrase de manière sécurisé
 
 ### 4 - Mémorisation du nom d'utilisateur et du mot de passe donné selon l'url.
-- `pass` : associe l'URL au mot de passe
-- `subprocess`
-- `glob` : lister les fichiers gpg
+- `os` : enregistre un fichier par URL
+- `gnupg`: chiffre le fichier en gpg
 
 ### 5 - Ajout d'un mot de passe
-- `pass insert`
-- `subprocess`
+- `os/open()`: créer un fichier temporaire
+- `gnupg`: chiffre le fichier en gpg
 
 ### 6 - Affichage d'un mot de passe
-- `pass show`
-- `subprocess`
-- `glob`
+- `gnupg`: déchiffre le fichier
+- `glob`: liste les fichiers
 
 ### 7 - Edition d'un mot de passe
-- `pass edit`
-- `subprocess`
+- `gnupg`: déchiffre le fichier gpg, rechiffre et écrase l'ancien fichier
+- `open()`: modification du contenu
 
 ### 8 - Suppresion d'un mot de passe
-- `pass rm`
-- `subprocess`
+- `os.remove()`: supprime le fichier
 
 ### 9 - Recherche d'un mot de passe
 - `re`: filtrer par URL, nom de site, identifiant.
