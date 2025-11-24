@@ -1,23 +1,21 @@
 import os
 from pathlib import Path
-import io
-import subprocess         
 import gnupg              
-import glob
-import re
-import pyperclip
+import argparse
+import stat
 import secrets
 import string
-from datetime import datetime
+import getpass
 import json
-import stat
+from datetime import datetime
+import pyperclip
 
 STORE_DIR_NAME = "password_store"
 BASE_DIR = Path(__file__).resolve().parent
 STORE_DIR = BASE_DIR / STORE_DIR_NAME
 
 
-def init_password_store(gpg_key_email=None, force=False):
+def init_password_store(gpg_key_email, force=False):
     """Initialise le magasin de mots de passe avec chiffrement GPG."""
     
     if not STORE_DIR.exists():
@@ -28,37 +26,45 @@ def init_password_store(gpg_key_email=None, force=False):
         return
 
     gpg = gnupg.GPG()
+    keys = gpg.list_keys(secret=True)
+    existing_key = None
     
-    if gpg_key_email:
-        keys = gpg.list_keys(secret=True)
-        existing_key = None
-        
-        for key in keys:
-            for uid in key.get('uids', []):
-                if gpg_key_email in uid:
-                    existing_key = key
-                    break
-        
-        if not existing_key:
-            print(f"Génération d'une clé GPG pour : {gpg_key_email}")
-            input_data = gpg.gen_key_input(
-                name_real="Password Store",
-                name_email=gpg_key_email,
-                key_type="RSA",
-                key_length=2048,
-                expire_date=0
-            )
-            key = gpg.gen_key(input_data)
-            print(f"Clé générée avec l'ID : {key.fingerprint}")
-        else:
-            print(f"Clé existante trouvée pour : {gpg_key_email}")
+    # Recherche de la clé correspondante
+    for key in keys:
+        for uid in key.get('uids', []):
+            if gpg_key_email in uid:
+                existing_key = key
+                break
+        if existing_key:
+            break
     
+    if not existing_key:
+        print(f"""
+        ⚠️  Aucune clé GPG trouvée pour : {gpg_key_email}
+        Veuillez créer une clé GPG manuellement :
+
+        1. Exécutez la commande suivante dans votre terminal :
+        gpg --full-generate-key
+
+        2. Choisissez les options suivantes :
+        - Type de clé : 1 (RSA et RSA)
+        - Taille : 2048
+        - Validité : 0 (pas d'expiration)
+        - Nom réel : Password Store
+        - Adresse e-mail : {gpg_key_email}
+        - Commentaire : (laissez vide)
+
+        3. Relancez ce script après la création de la clé
+        """)
+        return
+    else:
+        print(f"✓ Clé existante trouvée pour : {gpg_key_email}")
+    
+    # Sauvegarde de la configuration
     config_file = STORE_DIR / ".gpg-id"
     with open(config_file, 'w') as f:
         f.write(gpg_key_email + '\n')
     
     os.chmod(config_file, 0o600)
     
-    print("Magasin de mots de passe initialisé avec succès !")
-
-init_password_store(gpg_key_email="user@example.com"); 
+    print("✓ Magasin de mots de passe initialisé avec succès !")
