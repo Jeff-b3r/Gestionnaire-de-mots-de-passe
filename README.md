@@ -10,50 +10,49 @@
 ### 1 - Initialisation du magasin de mot de passe
 - Création du répertoire local ~/.password-store via init.
 - Utilisation d’une clé GPG existante pour le chiffrement.
-- `os/os.path`: crée le répertoire
+- `pathlib`: crée le répertoire
+- `os`: configure les permissions du dossier
 - `gnupg` : génère, stocke et utilise une clé GPG
 
 ### 2 - Chiffrement et déchiffrement des mots de passe du fichier
-- Chiffrement et déchiffrement des mots de passe avec gpg 
+- Chiffrement et déchiffrement des mots de passe avec `gnupg`
 - Chaque mot de passe est stocké dans un fichier .gpg chiffré.
-- Le déchiffrement est déclenché lors de la lecture avec show. 
-- `os` : lecture/écriture des fichiers avant chiffrement
+- Le déchiffrement est déclenché lors de la lecture avec show et edit. 
 
 ### 3 - Authentification de l'utilisateur via GPG 
 - L’accès aux mots de passe est protégé par la passphrase de la clé GPG.
 - Cette passphrase joue le rôle de mot de passe maître.
-- `gnupg`
+- `getpass`: entre le passphrase de manière sécurisé
 
 ### 4 - Mémorisation du nom d'utilisateur et du mot de passe donné selon l'url.
 - **dépend de 1**.
-- `os` : enregistre un fichier par URL
-- `gnupg`: chiffre le fichier en gpg
+- `json`: convertit le dictionnaire python en json
 
 ### 5 - Ajout d'un mot de passe
 - **dépend de 1 et 4**.
-- `os/open()`: créer un fichier 
-- `gnupg`: chiffre le fichier en gpg
+- `getpass`: entre le mot de passe
+- `os`: configure les permissions du fichier
 
 ### 6 - Affichage d'un mot de passe
 - **dépend de 1 et 4**.
 -   Affiche les mots de passe, avec l'identifiant mémorisé et l'URL associée
-- `gnupg`: déchiffre le fichier
-- `glob`: liste les fichiers
+- `json`: convertit le json en dictionnaire python
 
 ### 7 - Edition d'un mot de passe
 - **dépend de 1, 4 et 5**.
 -   Modifie un mot de passe dans le gestionnaire
-- `gnupg`: déchiffre le fichier gpg, rechiffre et écrase l'ancien fichier
-- `open()`: modification du contenu
+- `json`: convertit le json en dictionnaire python
+- `getpass`: entre le nouveau mot de passe
+- `os`: reconfigure les permissions du fichier
 
 ### 8 - Suppresion d'un mot de passe
 - **dépend de 1 et 5**.
-- `os.remove()`: supprime le fichier
+- `pathlib`: supprime le fichier
 
 ### 9 - Liste et recherche d'un mot de passe
 - **dépend de 1 et 4**.
-- Liste et recherche d'un mot de passe à partir du nom du site
-- `string`: filtrer par nom de site
+- Liste et recherche d'un mot de passe par le nom de fichier
+- `glob`: filtrer les fichiers par l'extension .gpg
 
 ## Fonctionnalités supplémentaires 
 ### 10 - Copie du mot de passe dans le presse-papier.
