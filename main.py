@@ -43,7 +43,7 @@ def init_password_store(gpg_key_email, force=False):
         return
     
     else:
-        print(f"✓ Clé existante trouvée pour : {gpg_key_email}")
+        print(f"Clé existante trouvée pour : {gpg_key_email}")
     
     # Sauvegarde de la configuration
     config_file = store / ".gpg-id"
@@ -51,16 +51,14 @@ def init_password_store(gpg_key_email, force=False):
         f.write(gpg_key_email + '\n')
     
     os.chmod(config_file, 0o600)
-    print("✓ Magasin de mots de passe initialisé avec succès !")
+    print("Magasin de mots de passe initialisé avec succès !")
 
-
+#Récupère l'email GPG depuis le fichier .gpg-id.
 def get_gpg_email():
-    """Récupère l'email GPG depuis le fichier .gpg-id."""
     config_file = store / ".gpg-id"
     
     if not config_file.exists():
         print("Erreur : Le magasin n'est pas initialisé.")
-        print("Exécutez d'abord : python main.py init <email>")
         return None
     
     with open(config_file, 'r') as f:
@@ -81,13 +79,12 @@ def add_password(name, length=20, generate=False, username=None, url=None):
     
     if password_file.exists():
         print(f"Un mot de passe existe déjà pour : {name}")
-        print("Utilisez --force pour écraser ou choisissez un autre nom")
         return
     
     # Déterminer le mot de passe à utiliser
     if generate:
         password = generate_password(length)
-        print(f"✓ Mot de passe généré pour : {name}")
+        print(f"Mot de passe généré pour : {name}")
     else:
         # Demander le mot de passe de manière sécurisée
         password = getpass.getpass("Entrez le mot de passe : ")
@@ -124,7 +121,7 @@ def add_password(name, length=20, generate=False, username=None, url=None):
     
     os.chmod(password_file, 0o600)
     
-    print(f"✓ Mot de passe ajouté : {name}")
+    print(f"  Mot de passe ajouté : {name}")
     if username:
         print(f"  Identifiant : {username}")
     if url:
@@ -134,7 +131,6 @@ def add_password(name, length=20, generate=False, username=None, url=None):
 
 #6 - Affichage d'un mot de passe
 def show_password(name, copy=False):
-    """Affiche le mot de passe déchiffré pour un nom donné."""
     password_file = store / f"{name}.gpg"
     
     if not password_file.exists():
@@ -158,7 +154,7 @@ def show_password(name, copy=False):
     decrypted = gpg.decrypt(encrypted_data, passphrase=passphrase_mdp)
     
     if not decrypted.ok:
-        print(f"Erreur de déchiffrement. Passphrase incorrecte ?")
+        print(f"Erreur de déchiffrement")
         return
     
     # Charger les données
@@ -169,7 +165,7 @@ def show_password(name, copy=False):
     if copy:
         try:
             pyperclip.copy(password)
-            print("✓ Mot de passe copié dans le presse-papiers !")
+            print("Mot de passe copié dans le presse-papiers !")
         except Exception as e:
             print(f"Erreur lors de la copie : {e}")
     
@@ -189,7 +185,6 @@ def show_password(name, copy=False):
 
 #7 - Edition d'un mot de passe
 def edit_password(name, username=None, url=None):
-    """Modifie un mot de passe existant dans le magasin."""
     password_file = store / f"{name}.gpg"
     
     if not password_file.exists():
@@ -210,7 +205,7 @@ def edit_password(name, username=None, url=None):
     decrypted = gpg.decrypt(encrypted_data, passphrase=passphrase)
     
     if not decrypted.ok:
-        print(f"Erreur de déchiffrement. Passphrase incorrecte ?")
+        print(f"Erreur de déchiffrement")
         return
     
     # Charger les données existantes
@@ -222,13 +217,13 @@ def edit_password(name, username=None, url=None):
     if username is not None:
         data["username"] = username
         modified = True
-        print(f"✓ Identifiant mis à jour : {username}")
+        print(f"Identifiant mis à jour : {username}")
     
     # Modifier l'URL si fournie
     if url is not None:
         data["url"] = url
         modified = True
-        print(f"✓ URL mise à jour : {url}")
+        print(f"URL mise à jour : {url}")
     
     # Si aucun argument n'est fourni, demander le nouveau mot de passe
     if not modified:
@@ -262,7 +257,6 @@ def edit_password(name, username=None, url=None):
 
 #8 - Suppression d'un mot de passe
 def delete_password(name):
-    """Supprime un mot de passe du magasin."""
     password_file = store / f"{name}.gpg"
     
     if not password_file.exists():
@@ -270,7 +264,7 @@ def delete_password(name):
         return
     
     password_file.unlink()
-    print(f"✓ Mot de passe supprimé : {name}")
+    print(f"Mot de passe supprimé : {name}")
 
 
 #9 - Liste et recherche d'un mot de passe
@@ -311,15 +305,13 @@ def list_passwords(search=None):
 
 #11 - Génération automatique d'un mot de passe sécurisé.
 def generate_password(length=20):
-    """Génère un mot de passe aléatoire sécurisé."""
     alphabet = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(secrets.choice(alphabet) for _ in range(length))
     return password
 
 def main():
-    """Point d'entrée principal du programme."""
     parser = argparse.ArgumentParser(
-        description="Gestionnaire de mots de passe chiffré avec GPG",
+        description="Gestionnaire de mots de passe chiffré avec GPG"
     )
     
     subparsers = parser.add_subparsers(dest='command', help='Commandes disponibles')
@@ -340,7 +332,7 @@ def main():
     add_parser = subparsers.add_parser('add', help='Ajouter un nouveau mot de passe')
     add_parser.add_argument(
         'name',
-        help='Nom/identifiant du mot de passe (ex: gmail, facebook)'
+        help='Nom/identifiant du mot de passe (ex: gmail, facebook, netflix)'
     )
     add_parser.add_argument(
         '-g', '--generate',
@@ -351,15 +343,15 @@ def main():
         '-l', '--length',
         type=int,
         default=20,
-        help='Longueur du mot de passe généré (par défaut: 20)'
+        help='Longueur du mot de passe généré (par défaut c\'est 20)'
     )
     add_parser.add_argument(
         '-u', '--username',
-        help='Identifiant/nom d\'utilisateur (optionnel)'
+        help='Identifiant ou nom d\'utilisateur'
     )
     add_parser.add_argument(
         '--url',
-        help='URL du site web (optionnel)'
+        help='URL du site web'
     )
 
     # Commande delete
@@ -377,11 +369,11 @@ def main():
     )
     edit_parser.add_argument(
         '-u', '--username',
-        help='Identifiant/nom d\'utilisateur (optionnel)'
+        help='Identifiant ou nom d\'utilisateur'
     )
     edit_parser.add_argument(
         '--url',
-        help='URL du site web (optionnel)'
+        help='URL du site web'
     )
     
     #Commande show
