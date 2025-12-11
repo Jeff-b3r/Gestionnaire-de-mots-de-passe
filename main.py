@@ -67,7 +67,6 @@ def get_gpg_email():
 #4 - Mémorisation du nom d'utilisateur et du mot de passe donné selon l'url.
 #5 - Ajout d'un mot de passe
 def add_password(name, length=20, generate=False, username=None, url=None):
-    """Ajoute un nouveau mot de passe chiffré au magasin."""
     
     # Vérifier que le magasin est initialisé
     gpg_email = get_gpg_email()
@@ -417,3 +416,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
