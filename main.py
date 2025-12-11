@@ -93,8 +93,10 @@ def add_password(name, length=20, generate=False, username=None, url=None):
             print("Les mots de passe ne correspondent pas")
             return
     
-    # Créer la structure de données avec toutes les informations
+    #12 - Création d'une date d'ajout
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Créer la structure de données
     data = {
         "password": password,
         "username": username,
@@ -416,4 +418,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
