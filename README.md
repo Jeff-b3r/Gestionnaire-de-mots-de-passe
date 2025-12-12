@@ -74,13 +74,11 @@
 ```
 Gestionnaire-de-mots-de-passe/
 │
-├── app.py                  # Programme principal : commandes init, add, show, edit, delete...
-├── password_store/         # Dossier créé après 'init', contient les fichiers .gpg chiffrés
-│   ├── .gpg-id             # Email de la clé GPG utilisée pour chiffrer/déchiffrer
-│   └── *.gpg               # Chaque mot de passe stocké dans un fichier chiffré
-│
-├── README.md               # Documentation du projet
-└── requirements.txt        # Dépendances Python
+├── .venv                # Environnement virtuelle contenant les modules installés
+├── password_store/      # Magasin de mot de passe crée après 'init'
+│   ├── .gpg-id          # Email de la clé GPG utilisée pour chiffrer/déchiffrer
+│   └── *.gpg            # Fichiers chiffrés où sont stockés chaque mot de passe
+└── main.py              # Le programme contenant chaque fonction et le 'main'
 ```
 
 
