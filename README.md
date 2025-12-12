@@ -69,6 +69,64 @@
 - Permet de connaitre la date de création ou de modification d'un mot de passe
 - `datetime` : génère la date actuelle
 
+## Installation et utilisation
+
+### Prérequis
+- Python 3.x
+- GPG installé sur votre système
+
+### Installation
+1. Clonez le dépôt :
+```bash
+git clone <url-du-depot>
+cd Gestionnaire-de-mots-de-passe
+```
+
+2. Installez les dépendances :
+```bash
+pip install -r requirements.txt
+```
+
+3. Créez une clé GPG si vous n'en avez pas :
+```bash
+gpg --full-generate-key
+```
+
+### Utilisation
+
+**Initialiser le gestionnaire :**
+```bash
+python main.py init votre.email@exemple.com
+```
+
+**Ajouter un mot de passe :**
+```bash
+python main.py add gmail -u username --url https://gmail.com
+python main.py add facebook -g -l 25  # Génération automatique
+```
+
+**Afficher un mot de passe :**
+```bash
+python main.py show gmail
+python main.py show gmail -c  # Copier dans le presse-papiers
+```
+
+**Modifier un mot de passe :**
+```bash
+python main.py edit gmail
+```
+
+**Lister les mots de passe :**
+```bash
+python main.py list
+python main.py list -s gmail  # Rechercher
+```
+
+**Supprimer un mot de passe :**
+```bash
+python main.py delete gmail
+```
+
 ## Structure du projet
 
 ```
@@ -78,6 +136,7 @@ Gestionnaire-de-mots-de-passe/
 ├── password_store/      Magasin de mot de passe crée après 'init'
 │   ├── .gpg-id          Email de la clé GPG utilisée pour chiffrer et déchiffrer
 │   └── *.gpg            Fichiers chiffrés où sont stockés chaque mot de passe
+├── requirements.txt     Liste des dépendances Python
 └── main.py              Programme contenant chaque fonction et le 'main'
 ```
 
