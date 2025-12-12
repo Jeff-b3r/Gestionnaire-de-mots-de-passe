@@ -198,12 +198,12 @@ def edit_password(name, username=None, url=None):
         return
     
     #3 - Authentification de l'utilisateur via GPG
-    passphrase = getpass.getpass("Entrez la passphrase de votre clé GPG : ")
+    passphrase_mdp = getpass.getpass("Entrez la passphrase de votre clé GPG : ")
     with open(password_file, 'r') as f:
         encrypted_data = f.read()
     
     gpg = gnupg.GPG()
-    decrypted = gpg.decrypt(encrypted_data, passphrase=passphrase)
+    decrypted = gpg.decrypt(encrypted_data, passphrase=passphrase_mdp)
     
     if not decrypted.ok:
         print(f"Erreur de déchiffrement")
@@ -418,5 +418,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
