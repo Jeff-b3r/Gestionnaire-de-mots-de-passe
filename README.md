@@ -69,13 +69,4 @@
 - Permet de connaitre la date de création ou de modification d'un mot de passe
 - `datetime` : génère la date actuelle
 
-Gestionnaire-de-mots-de-passe/
-│
-├── app.py                  # Programme principal : commandes init, add, show, edit, delete...
-├── password_store/         # Dossier créé après 'init', contient les fichiers .gpg chiffrés
-│   ├── .gpg-id             # Email de la clé GPG utilisée pour chiffrer/déchiffrer
-│   └── *.gpg               # Chaque mot de passe stocké dans un fichier chiffré
-│
-├── README.md               # Documentation du projet
-└── requirements.txt 
 
