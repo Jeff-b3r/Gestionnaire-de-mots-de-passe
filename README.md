@@ -74,11 +74,11 @@
 ```
 Gestionnaire-de-mots-de-passe/
 │
-├── .venv                # Environnement virtuelle contenant les modules installés
-├── password_store/      # Magasin de mot de passe crée après 'init'
-│   ├── .gpg-id          # Email de la clé GPG utilisée pour chiffrer/déchiffrer
-│   └── *.gpg            # Fichiers chiffrés où sont stockés chaque mot de passe
-└── main.py              # Le programme contenant chaque fonction et le 'main'
+├── .venv                Environnement virtuel contenant les modules installés
+├── password_store/      Magasin de mot de passe crée après 'init'
+│   ├── .gpg-id          Email de la clé GPG utilisée pour chiffrer et déchiffrer
+│   └── *.gpg            Fichiers chiffrés où sont stockés chaque mot de passe
+└── main.py              Programme contenant chaque fonction et le 'main'
 ```
 
 
