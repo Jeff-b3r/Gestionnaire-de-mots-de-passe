@@ -69,4 +69,24 @@
 - Permet de connaitre la date de création ou de modification d'un mot de passe
 - `datetime` : génère la date actuelle
 
+## Répartition du travail
+### Travail réalisé ensemble
+- Initialisation du magasin de mot de passe
+- Chiffrement et déchiffrement des fichiers
+- Gestion du passphrase et authentification
+- Enregistrement d'une date de création ou modification
+- `main`: ajout du texte d'aide, des commandes et options
 
+### Travail réalisé par BERNABEO Jeff
+- Création de la structure de données (mot de passe, url, date...)
+- Fonction d'ajout d'un mot de passe
+- Configuration de la permission d'un fichier (chmod)
+- Modification d'un mot de passe dans le gestionnaire
+- Génération automatique de mots de passe sécurisés
+
+### Travail réalisé par UNG Roland
+- Fonction d'affichage d'un mot de passe
+- Copie automatique dans le presse-papier
+- Fonction de suppresion d'un mot de passe
+- Fonction pour lister tous les fichiers .gpg
+- Recherche d'un mot de passe
