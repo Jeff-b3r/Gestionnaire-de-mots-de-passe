@@ -136,6 +136,7 @@ Gestionnaire-de-mots-de-passe/
 ├── password_store/      Magasin de mot de passe crée après 'init'
 │   ├── .gpg-id          Email de la clé GPG utilisée pour chiffrer et déchiffrer
 │   └── *.gpg            Fichiers chiffrés où sont stockés chaque mot de passe
+├── .gitignore           Fichiers à exclure de Git (venv, password_store...)
 ├── requirements.txt     Liste des dépendances Python
 └── main.py              Programme contenant chaque fonction et le 'main'
 ```
