@@ -113,7 +113,7 @@ python main.py show gmail -c  # Copier dans le presse-papiers
 
 **Modifier un mot de passe :**
 ```bash
-python main.py edit gmail
+python main.py edit gmail -u username --url https://gmail.com
 ```
 
 **Lister les mots de passe :**
